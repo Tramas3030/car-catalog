@@ -1,4 +1,4 @@
-package br.com.Tramas3030.car_catalog.modules.client.repositories;
+package br.com.Tramas3030.car_catalog.modules.client.entities;
 
 
 import jakarta.persistence.Entity;
