@@ -23,7 +23,7 @@ public class ClientController {
             var result = this.createClientUseCase.execute(clientEntity);
             return ResponseEntity.ok().body(result);
         } catch (Exception e) {
-            ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
