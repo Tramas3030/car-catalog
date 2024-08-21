@@ -21,10 +21,10 @@ public class CompanyEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotBlank
+    @NotBlank()
     private String name;
 
-    @NotBlank
+    @NotBlank()
     private String address;
 
     @Email(message = "O campo [email] deve conter um email válido")
