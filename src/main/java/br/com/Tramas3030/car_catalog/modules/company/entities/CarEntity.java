@@ -18,6 +18,8 @@ public class CarEntity {
 
     @NotBlank()
     private String name;
+
+    @NotBlank()
     private String color;
 
     @NotBlank()

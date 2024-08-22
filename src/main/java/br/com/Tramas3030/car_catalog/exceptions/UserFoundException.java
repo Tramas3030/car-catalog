@@ -1,8 +1,8 @@
 package br.com.Tramas3030.car_catalog.exceptions;
 
-public class UserFounderException extends RuntimeException {
+public class UserFoundException extends RuntimeException {
 
-    public UserFounderException() {
+    public UserFoundException() {
         super("Usuário já existe");
     }
 
