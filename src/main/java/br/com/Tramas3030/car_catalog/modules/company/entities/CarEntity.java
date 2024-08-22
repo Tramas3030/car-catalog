@@ -2,7 +2,10 @@ package br.com.Tramas3030.car_catalog.modules.company.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -10,6 +13,9 @@ import java.util.UUID;
 
 @Data
 @Entity(name = "car")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CarEntity {
 
     @Id
