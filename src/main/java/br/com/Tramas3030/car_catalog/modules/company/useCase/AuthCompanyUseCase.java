@@ -1,6 +1,7 @@
 package br.com.Tramas3030.car_catalog.modules.company.useCase;
 
 import br.com.Tramas3030.car_catalog.modules.company.dto.AuthCompanyDTO;
+import br.com.Tramas3030.car_catalog.modules.company.dto.AuthCompanyResponseDTO;
 import br.com.Tramas3030.car_catalog.modules.company.repositories.CompanyRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -27,7 +28,7 @@ public class AuthCompanyUseCase {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
+    public AuthCompanyResponseDTO execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
         var company = this.companyRepository.findByName(authCompanyDTO.getName())
                 .orElseThrow(() -> new UsernameNotFoundException("Company not found"));
 
@@ -39,10 +40,18 @@ public class AuthCompanyUseCase {
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
 
-        return JWT.create().withIssuer("Car catalog")
-                .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
+        var expiresIn = Instant.now().plus(Duration.ofHours(2));
+
+        var token = JWT.create().withIssuer("Car catalog")
+                .withExpiresAt(expiresIn)
+                .withClaim("roles", "COMPANY")
                 .withSubject(company.getId().toString())
                 .sign(algorithm);
+
+        return AuthCompanyResponseDTO.builder()
+                .access_token(token)
+                .expires_in(expiresIn.toEpochMilli())
+                .build();
     }
 
 }

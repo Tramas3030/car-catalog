@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ public class CarController {
     private CreateCarUseCase createCarUseCase;
 
     @PostMapping("/")
+    @PreAuthorize("hasRole('COMPANY')")
     public ResponseEntity<Object> create(@Valid @RequestBody CreateCarDTO createCarDTO, HttpServletRequest request) {
         try {
             var companyId = request.getAttribute("company_id");

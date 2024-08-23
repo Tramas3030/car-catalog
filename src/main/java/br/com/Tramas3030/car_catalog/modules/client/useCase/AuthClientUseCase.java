@@ -46,7 +46,7 @@ public class AuthClientUseCase {
         var token = JWT.create()
                 .withIssuer("Car catalog")
                 .withSubject(client.getId().toString())
-                .withClaim("roles", Arrays.asList("client"))
+                .withClaim("roles", Arrays.asList("CLIENT"))
                 .withExpiresAt(expiresIn)
                 .sign(algorithm);
 

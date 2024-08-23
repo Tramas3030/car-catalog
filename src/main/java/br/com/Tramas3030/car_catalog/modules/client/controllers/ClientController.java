@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -32,6 +33,7 @@ public class ClientController {
     }
 
     @GetMapping("/")
+    @PreAuthorize("hasRole('CLIENT')")
     public ResponseEntity<Object> get(HttpServletRequest request) {
         var idClient = request.getAttribute("client_id");
 
@@ -39,7 +41,6 @@ public class ClientController {
             var profile = this.profileClientUseCase.execute(UUID.fromString(idClient.toString()));
             return ResponseEntity.ok().body(profile);
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
