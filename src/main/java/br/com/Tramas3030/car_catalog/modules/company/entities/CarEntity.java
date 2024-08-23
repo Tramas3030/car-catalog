@@ -22,19 +22,19 @@ public class CarEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotBlank()
+    @NotBlank(message = "O campo nome é obrigatório")
     private String name;
 
-    @NotBlank()
+    @NotBlank(message = "O campo cor é obrigatório")
     private String color;
 
-    @NotBlank()
+    @NotBlank(message = "O campo descrição é obrigatório")
     private String description;
 
-    @NotBlank()
+    @NotBlank(message = "O campo ano modelo é obrigatório")
     private String modelYear;
 
-    @NotBlank()
+    @NotBlank(message = "O campo nome fabricante é obrigatório")
     private String manufacturer;
 
     @ManyToOne()

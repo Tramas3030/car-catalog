@@ -1,5 +1,6 @@
 package br.com.Tramas3030.car_catalog.modules.company.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
