@@ -15,6 +15,7 @@ import org.springframework.security.core.AuthenticationException;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Arrays;
 
 @Service
 public class AuthCompanyUseCase {
@@ -44,7 +45,7 @@ public class AuthCompanyUseCase {
 
         var token = JWT.create().withIssuer("Car catalog")
                 .withExpiresAt(expiresIn)
-                .withClaim("roles", "COMPANY")
+                .withClaim("roles", Arrays.asList("COMPANY"))
                 .withSubject(company.getId().toString())
                 .sign(algorithm);
 

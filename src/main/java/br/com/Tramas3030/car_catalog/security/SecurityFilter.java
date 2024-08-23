@@ -27,9 +27,8 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         if(request.getRequestURI().startsWith("/car/") || request.getRequestURI().startsWith("/auth/company")) {
             if(header != null) {
-                var token = jwtProvider.validateToken(header);
 
-                System.out.println(token.getClaim("roles"));
+                var token = jwtProvider.validateToken(header);
 
                 if(token == null) {
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -37,6 +36,7 @@ public class SecurityFilter extends OncePerRequestFilter {
                 }
 
                 var roles = token.getClaim("roles").asList(Object.class);
+
                 var grants = roles.stream()
                         .map(role -> new SimpleGrantedAuthority("ROLE_"+role.toString().toUpperCase()))
                         .toList();
