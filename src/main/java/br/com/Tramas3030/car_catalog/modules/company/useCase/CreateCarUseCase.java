@@ -13,7 +13,7 @@ public class CreateCarUseCase {
     private CarRepository carRepository;
 
     public CarEntity execute(CarEntity carEntity) {
-        this.carRepository.findByNameAndColor(carEntity.getName(), carEntity.getColor())
+        this.carRepository.findByNameAndColorAndCompanyId(carEntity.getName(), carEntity.getColor(), carEntity.getCompanyId())
                 .ifPresent(car -> {
                     throw new CarFoundException();
                 });

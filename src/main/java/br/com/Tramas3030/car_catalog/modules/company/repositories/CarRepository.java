@@ -7,5 +7,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CarRepository extends JpaRepository<CarEntity, UUID> {
-    Optional<CarEntity> findByNameAndColor(String name, String color);
+    Optional<CarEntity> findByNameAndColorAndCompanyId(String name, String color, UUID company_id);
 }
