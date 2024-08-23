@@ -23,6 +23,7 @@ public class AuthClientController {
             var token = this.authClientUseCase.execute(authClientRequestDTO);
             return ResponseEntity.ok().body(token);
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }
