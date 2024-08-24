@@ -37,4 +37,44 @@ Como o deploy da aplicação ainda não foi feita, no momento só é possível a
     3. Rode o comando no terminal: docker-compose up -d
     4. Execute o CarCatalogApplication.Java
 
+
+
 ## Documentação da API
+
+#### Criar um cliente
+
+```http
+  POST localhost:8080/client/
+```
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `name` | `string` | **Obrigatório**. O nome do cliente |
+| `username`  | `string` | **Obrigatório**. O username do cliente |
+| `email` | `string` | **Obrigatório**. O email do cliente |
+| `password` | `string` | **Obrigatório**. A senha do cliente |
+
+
+
+#### Autenticação de um cliente
+
+```http
+  POST localhost:8080/auth/client
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `username`      | `string` | **Obrigatório**. O username do cliente que deseja autenticar |
+| `password`      | `string` | **Obrigatório**. A senha do item que deseja autenticar |
+
+
+#### Obter as informações cadastradas de um cliente
+
+```http
+  GET localhost:8080/client/
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `Authorization`      | `Header` | **Obrigatório**. Bearer token para autenticação. Deve ser incluído no cabeçalho da requisição no formato "Bearer {token}". O token será obtido ao fazer a autenticação de um cliente |
+
