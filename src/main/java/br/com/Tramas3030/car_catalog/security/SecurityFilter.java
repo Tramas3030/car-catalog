@@ -25,7 +25,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String header = request.getHeader("Authorization");
 
-        if(request.getRequestURI().startsWith("/car/") || request.getRequestURI().startsWith("/auth/company")) {
+        if(request.getRequestURI().startsWith("/car/") || request.getRequestURI().startsWith("/auth/company") || request.getRequestURI().startsWith("/company/cars")) {
             if(header != null) {
 
                 var token = jwtProvider.validateToken(header);
