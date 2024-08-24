@@ -39,6 +39,7 @@ Como o deploy da aplicação ainda não foi feita, no momento só é possível a
 
 
 
+
 ## Documentação da API
 
 #### Criar um cliente
@@ -50,7 +51,7 @@ Como o deploy da aplicação ainda não foi feita, no momento só é possível a
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
 | `name` | `string` | **Obrigatório**. O nome do cliente |
-| `username`  | `string` | **Obrigatório**. O username do cliente |
+| `username`  | `string` | **Obrigatório**. O nome de usuário do cliente |
 | `email` | `string` | **Obrigatório**. O email do cliente |
 | `password` | `string` | **Obrigatório**. A senha do cliente |
 
@@ -64,8 +65,8 @@ Como o deploy da aplicação ainda não foi feita, no momento só é possível a
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `username`      | `string` | **Obrigatório**. O username do cliente que deseja autenticar |
-| `password`      | `string` | **Obrigatório**. A senha do item que deseja autenticar |
+| `username`      | `string` | **Obrigatório**. O nome de usuário do cliente que deseja autenticar |
+| `password`      | `string` | **Obrigatório**. A senha do cliente que deseja autenticar |
 
 
 #### Obter as informações cadastradas de um cliente
@@ -78,3 +79,38 @@ Como o deploy da aplicação ainda não foi feita, no momento só é possível a
 | :---------- | :--------- | :------------------------------------------ |
 | `Authorization`      | `Header` | **Obrigatório**. Bearer token para autenticação. Deve ser incluído no cabeçalho da requisição no formato "Bearer {token}". O token será obtido ao fazer a autenticação de um cliente |
 
+#### Criar uma empresa
+
+```http
+  POST localhost:8080/company/
+```
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `name` | `string` | **Obrigatório**. O nome da empresa |
+| `address`  | `string` | **Obrigatório**. O endereço da empresa |
+| `email` | `string` | **Obrigatório**. O email da empresa |
+| `password` | `string` | **Obrigatório**. A senha da empresa |
+| `website` | `string` | O link do website da empresa |
+| `description` | `string` | Descrição da empresa |
+
+#### Autenticação de uma empresa
+
+```http
+  POST localhost:8080/auth/company
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `name`      | `string` | **Obrigatório**. O nome do cliente que deseja autenticar |
+| `password`      | `string` | **Obrigatório**. A senha da empresa que deseja autenticar |
+
+#### Obter as informações cadastradas de uma empresa
+
+```http
+  GET localhost:8080/company/
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `Authorization`      | `Header` | **Obrigatório**. Bearer token para autenticação. Deve ser incluído no cabeçalho da requisição no formato "Bearer {token}". O token será obtido ao fazer a autenticação de uma empresa |
