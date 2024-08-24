@@ -1,6 +1,18 @@
 
 ## Propósito do projeto
-
+O objetivo deste projeto é desenvolver uma API 
+para um website de catálogo de carros, cujo 
+objetivo é facilitar a divulgação de 
+empresas especializadas no setor automotivo, 
+como revendas, trocas de veículos e 
+negócios focados em carros antigos. 
+A API visa conectar essas empresas com 
+potenciais clientes, permitindo que 
+encontrem com mais facilidade os 
+serviços e produtos oferecidos, 
+promovendo assim um ambiente de 
+maior visibilidade e acessibilidade 
+no mercado automotivo.
 ## Autor
 
 - Matheus Raphael Trindade Guedes
@@ -113,4 +125,19 @@ Como o deploy da aplicação ainda não foi feita, no momento só é possível a
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
+| `Authorization`      | `Header` | **Obrigatório**. Bearer token para autenticação. Deve ser incluído no cabeçalho da requisição no formato "Bearer {token}". O token será obtido ao fazer a autenticação de uma empresa |
+
+#### Criar um carro
+
+```http
+  POST localhost:8080/car/
+```
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `name` | `string` | **Obrigatório**. O nome do carro |
+| `color`  | `string` | **Obrigatório**. A cor do carro |
+| `description` | `string` | **Obrigatório**. A descrição do carro |
+| `modelYear` | `string` | **Obrigatório**. O ano modelo do carro |
+| `manufacturer` | `string` | **Obrigatório**. A fabricante do carro |
 | `Authorization`      | `Header` | **Obrigatório**. Bearer token para autenticação. Deve ser incluído no cabeçalho da requisição no formato "Bearer {token}". O token será obtido ao fazer a autenticação de uma empresa |
