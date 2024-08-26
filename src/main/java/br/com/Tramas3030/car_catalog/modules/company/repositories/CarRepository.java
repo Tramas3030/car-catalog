@@ -11,4 +11,6 @@ public interface CarRepository extends JpaRepository<CarEntity, UUID> {
     Optional<CarEntity> findByNameAndColorAndCompanyId(String name, String color, UUID company_id);
 
     List<CarEntity> findAllByCompanyId(UUID companyId);
+
+    Optional<CarEntity> findByIdAndCompanyId(UUID id, UUID companyId);
 }

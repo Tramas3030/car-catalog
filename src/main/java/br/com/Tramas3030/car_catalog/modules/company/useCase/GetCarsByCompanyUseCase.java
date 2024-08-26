@@ -34,5 +34,4 @@ public class GetCarsByCompanyUseCase {
 
         return getCarsByCompanyDTO;
     }
-
 }
