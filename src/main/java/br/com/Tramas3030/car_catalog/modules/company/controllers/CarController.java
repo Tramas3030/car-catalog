@@ -1,9 +1,11 @@
 package br.com.Tramas3030.car_catalog.modules.company.controllers;
 
 import br.com.Tramas3030.car_catalog.modules.company.dto.CreateCarDTO;
+import br.com.Tramas3030.car_catalog.modules.company.dto.UpdateCarDTO;
 import br.com.Tramas3030.car_catalog.modules.company.entities.CarEntity;
 import br.com.Tramas3030.car_catalog.modules.company.useCase.CreateCarUseCase;
 import br.com.Tramas3030.car_catalog.modules.company.useCase.DeleteCarUseCase;
+import br.com.Tramas3030.car_catalog.modules.company.useCase.UpdateCarUseCase;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class CarController {
 
     @Autowired
     private CreateCarUseCase createCarUseCase;
+
+    @Autowired
+    private UpdateCarUseCase updateCarUseCase;
 
     @Autowired
     private DeleteCarUseCase deleteCarUseCase;
@@ -39,6 +44,18 @@ public class CarController {
 
             var result = this.createCarUseCase.execute(carEntity);
             return  ResponseEntity.ok().body(result);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{carId}")
+    @PreAuthorize("hasRole('COMPANY')")
+    public ResponseEntity<Object> update(@PathVariable UUID carId, @RequestBody UpdateCarDTO updateCarDTO, HttpServletRequest request) {
+        try {
+            var companyId = request.getAttribute("company_id");
+            var result = this.updateCarUseCase.execute(carId, UUID.fromString(companyId.toString()), updateCarDTO);
+            return ResponseEntity.ok().body(result);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
