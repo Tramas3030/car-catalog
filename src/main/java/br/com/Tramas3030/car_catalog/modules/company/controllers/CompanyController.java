@@ -31,18 +31,13 @@ public class CompanyController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
+    
     @GetMapping("/cars")
     @PreAuthorize("hasRole('COMPANY')")
     public ResponseEntity<Object> get(HttpServletRequest request) {
         try {
             var companyId = request.getAttribute("company_id");
-            System.out.println("------- ID DA COMPANY -------");
-            System.out.println(companyId);
             var result = this.getCarsByCompanyUseCase.execute(UUID.fromString(companyId.toString()));
-
-            System.out.println("------- RESULTADO DA PESQUISA -------");
-            System.out.println(result);
             return ResponseEntity.ok().body(result);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

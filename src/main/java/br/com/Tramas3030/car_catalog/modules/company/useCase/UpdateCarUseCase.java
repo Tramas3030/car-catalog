@@ -1,5 +1,6 @@
 package br.com.Tramas3030.car_catalog.modules.company.useCase;
 
+import br.com.Tramas3030.car_catalog.exceptions.CarFoundException;
 import br.com.Tramas3030.car_catalog.modules.company.dto.UpdateCarDTO;
 import br.com.Tramas3030.car_catalog.modules.company.entities.CarEntity;
 import br.com.Tramas3030.car_catalog.modules.company.repositories.CarRepository;
@@ -20,7 +21,7 @@ public class UpdateCarUseCase {
         var car = this.carRepository.findByIdAndCompanyId(carId, companyId)
                 .orElseThrow(() -> new RuntimeException("Car not found"));
 
-        var uptadedCarInformations = CarEntity.builder()
+        var updatedCarInformations = CarEntity.builder()
                 .id(car.getId())
                 .name(updateCarDTO.getName() != null ? updateCarDTO.getName() : car.getName())
                 .color(updateCarDTO.getColor() != null ? updateCarDTO.getColor() : car.getColor())
@@ -28,9 +29,15 @@ public class UpdateCarUseCase {
                 .modelYear(updateCarDTO.getModelYear() != null ? updateCarDTO.getModelYear() : car.getModelYear())
                 .manufacturer(updateCarDTO.getManufacturer() != null ? updateCarDTO.getManufacturer() : car.getManufacturer())
                 .companyId(car.getCompanyId())
+                .createdAt(car.getCreatedAt())
                 .build();
 
-        return this.carRepository.save(uptadedCarInformations);
+        this.carRepository.findByNameAndColorAndCompanyId(updatedCarInformations.getName(), updatedCarInformations.getColor(), companyId)
+                .ifPresent(carFound -> {
+                    throw new CarFoundException();
+                });
+
+        return this.carRepository.save(updatedCarInformations);
     }
 
 }
